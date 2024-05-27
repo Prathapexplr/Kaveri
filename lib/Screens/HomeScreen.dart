@@ -30,16 +30,16 @@ class _NavigationScreenState extends State<NavigationScreen> {
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
-        OrderScreen(
-            employeeId: widget.employeeId,
-            firstName: widget.firstName,
-            profilePicture: widget.profilePicture),
         Neworder(
           firstName: widget.firstName,
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
         AddItems(
+            employeeId: widget.employeeId,
+            firstName: widget.firstName,
+            profilePicture: widget.profilePicture),
+        OrderScreen(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
             profilePicture: widget.profilePicture),
@@ -60,11 +60,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.task_outlined), label: 'Order'),
+          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
           BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Client'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.wb_iridescent), label: 'Expense'),
+              icon: Icon(Icons.task_outlined), label: 'Order'),
         ],
       ),
     );
