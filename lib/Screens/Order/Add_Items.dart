@@ -327,11 +327,13 @@ class _AddItemsState extends State<AddItems> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SelectedClientScreen(
-                                  employeeId: widget.employeeId,
-                                  firstName: widget.firstName,
-                                  profilePicture: widget.profilePicture,
-                                )),
+                            builder: (context) => SizedBox()
+                            // SelectedClientScreen(
+                            //       employeeId: widget.employeeId,
+                            //       firstName: widget.firstName,
+                            //       profilePicture: widget.profilePicture,
+                            //     )
+                                ),
                       );
                     },
                     child: Container(
