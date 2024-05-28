@@ -36,7 +36,7 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
       setState(() {
         clients = jsonResponse[
-            'clients']; // Adjust this based on the actual JSON structure
+            'clients'];
         isLoading = false;
       });
     } else {
