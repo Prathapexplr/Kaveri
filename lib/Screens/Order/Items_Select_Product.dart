@@ -114,6 +114,12 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                     employeeId: widget.employeeId,
                                     firstName: widget.firstName,
                                     profilePicture: widget.profilePicture,
+                                    productName: product['productName'] ??
+                                        'No Product Name',
+                                    amount: product['price']?.toString() ??
+                                        'No Price',
+                                    productID:
+                                        product['productID'] ?? 'No Product ID',
                                   ),
                                 ),
                               );
@@ -150,14 +156,16 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                           width: 20,
                                         ),
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
-                                                Text(
-                                                  product['productName'] ?? '',
-                                                  style: const TextStyle(
+                                                const Text(
+                                                  "Name",
+                                                  style: TextStyle(
                                                       color: Colors.black,
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
@@ -165,10 +173,11 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                                   width: 20,
                                                 ),
                                                 Text(
-                                                  product['price'] ?? '',
+                                                  product['productName'] ??
+                                                      'No Product Name',
                                                   style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontSize: 16,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
@@ -191,7 +200,8 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                                   width: 35,
                                                 ),
                                                 Text(
-                                                  product['_id'] ?? '',
+                                                  product['productID'] ??
+                                                      'No Product ID',
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 14,
@@ -217,7 +227,7 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                                   width: 15,
                                                 ),
                                                 Text(
-                                                  '\u{20B9}${product['price'] ?? ''}',
+                                                  '\u{20B9}${product['price']?.toString() ?? ''}',
                                                   style: const TextStyle(
                                                       color: Color(0xff422BCF),
                                                       fontSize: 14,

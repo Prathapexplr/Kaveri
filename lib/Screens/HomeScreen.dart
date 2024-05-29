@@ -9,12 +9,18 @@ class NavigationScreen extends StatefulWidget {
   final String firstName;
   final String employeeId;
   final String profilePicture;
+  // final String productID;
+  // final String productName;
+  // final String amount;
 
   const NavigationScreen({
     Key? key,
     required this.firstName,
     required this.employeeId,
     required this.profilePicture,
+    // required this.productID,
+    // required this.productName,
+    // required this.amount
   }) : super(key: key);
 
   @override
@@ -38,7 +44,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
         AddItems(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
-            profilePicture: widget.profilePicture),
+            profilePicture: widget.profilePicture,
+            amount: 'widget.amount',
+            productID: 'widget.productID',
+            productName: 'widget.productName'),
         OrderScreen(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
