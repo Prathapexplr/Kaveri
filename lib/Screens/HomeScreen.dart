@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kaveri/Screens/Description.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:kaveri/Screens/Order/Add_Items.dart';
 import 'package:kaveri/Screens/Order/Neworder.dart';
 import 'package:kaveri/Screens/Order/Order_Screen.dart';
@@ -9,18 +10,12 @@ class NavigationScreen extends StatefulWidget {
   final String firstName;
   final String employeeId;
   final String profilePicture;
-  // final String productID;
-  // final String productName;
-  // final String amount;
 
   const NavigationScreen({
     Key? key,
     required this.firstName,
     required this.employeeId,
     required this.profilePicture,
-    // required this.productID,
-    // required this.productName,
-    // required this.amount
   }) : super(key: key);
 
   @override
@@ -95,25 +90,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class Todo {
-  String title;
-  bool isDone;
-
-  Todo({
-    required this.title,
-    this.isDone = false,
-  });
-}
-
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<Todo> todos = [
-    Todo(title: 'Visit saravana hardware ', isDone: false),
-    Todo(title: 'Complete payment', isDone: false),
-    Todo(title: 'visit Arul Traders', isDone: false),
-    Todo(title: 'check TMT delivery ', isDone: false),
-  ];
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: const Color(0xffEBF5FF),
         title: const Text('Home'),
-        titleTextStyle: const TextStyle(color: Colors.blue),
+        titleTextStyle:
+            const TextStyle(color: Colors.black), 
         centerTitle: true,
       ),
       drawer: Drawer(
@@ -138,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             DrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xffB7DBFF),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -164,8 +146,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Column(
                         children: [
-                          Text(widget.firstName),
-                          Text(widget.employeeId),
+                          Text(
+                            widget.firstName,
+                            style: GoogleFonts.roboto(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            widget.employeeId,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ],
                       )
                     ],
@@ -200,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                height: 500,
+                height: 392,
                 width: width,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -217,55 +211,126 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Text(
-                        'Daily Task',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 35,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: todos.length,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Divider();
-                        },
-                        itemBuilder: (context, index) {
-                          final todo = todos[index];
-                          return ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DescriptionScreen(),
-                                ),
-                              );
-                            },
-                            leading: Checkbox(
-                              value: todo.isDone,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  todo.isDone = value!;
-                                });
-                              },
-                            ),
-                            title: Text(todo.title),
-                          );
-                        },
-                      ),
+                    TableCalendar(
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: _focusedDay,
+                      calendarFormat: _calendarFormat,
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
+                        });
+                      },
+                      onFormatChanged: (format) {
+                        if (_calendarFormat != format) {
+                          setState(() {
+                            _calendarFormat = format;
+                          });
+                        }
+                      },
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
                     ),
                   ],
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
+              ),
+              Container(
+                height: 140,
+                width: width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "09:40 AM",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "Punch In Time",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "06:55 PM",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "Punch Out Time",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Monthly Present",
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(width: 30),
+                          Text(
+                            "23",
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               SizedBox(
                   height: 130,

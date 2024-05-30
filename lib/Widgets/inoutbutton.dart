@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print, no_logic_in_create_state, library_private_types_in_public_api
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -14,6 +12,7 @@ class InOutButton extends StatefulWidget {
     required this.firstName,
     required this.employeeId,
   }) : super(key: key);
+
   @override
   _InOutButtonState createState() => _InOutButtonState(
         firstName: firstName,
@@ -22,13 +21,14 @@ class InOutButton extends StatefulWidget {
 }
 
 class _InOutButtonState extends State<InOutButton> {
-  String firstName;
-  String employeeId;
+  final String firstName;
+  final String employeeId;
 
   _InOutButtonState({
     required this.firstName,
     required this.employeeId,
   });
+
   bool isIn = false;
   String punchedInTime = '';
   late IO.Socket socket;
@@ -50,22 +50,35 @@ class _InOutButtonState extends State<InOutButton> {
   }
 
   void initSocket() {
-    socket = IO.io('https://api.jaynaturals.com/', <String, dynamic>{
-      'transports': ['websocket'],
+    socket = IO.io('https://api.jaynaturals.com', <String, dynamic>{
+      'transports': ['websocket','polling'],
       'autoConnect': false,
     });
+
     socket.on('connect', (_) {
       print('Connected to socket server');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Connected to socket server')),
-      );
+      // Emit a test event when connected
+      socket.emit('testConnection', {'message': 'Test connection successful'});
     });
+
     socket.on('disconnect', (_) {
       print('Disconnected from socket server');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Disconnected from socket server')),
-      );
     });
+
+    socket.on('connect_error', (error) {
+      print('Connection Error: $error');
+      // Additional logging
+      if (error is Map &&
+          error.containsKey('type') &&
+          error['type'] == 'TransportError') {
+        print('TransportError: ${error['desc'] ?? 'No description provided'}');
+      }
+    });
+
+    socket.on('error', (error) {
+      print('Socket Error: $error');
+    });
+
     socket.connect();
   }
 
@@ -80,6 +93,7 @@ class _InOutButtonState extends State<InOutButton> {
               'Location services are disabled. Please enable the services')));
       return false;
     }
+
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -89,12 +103,14 @@ class _InOutButtonState extends State<InOutButton> {
         return false;
       }
     }
+
     if (permission == LocationPermission.deniedForever) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
               'Location permissions are permanently denied, we cannot request permissions.')));
       return false;
     }
+
     return true;
   }
 
@@ -118,7 +134,7 @@ class _InOutButtonState extends State<InOutButton> {
     timer = Timer.periodic(const Duration(seconds: 10), (_) {
       if (isIn && lastPosition != null) {
         print(
-            'Sending location for $firstName (ID: $employeeId): ${lastPosition!.latitude}, ${lastPosition!.longitude}');
+            'Preparing to send location for $firstName (ID: $employeeId): ${lastPosition!.latitude}, ${lastPosition!.longitude}');
         socket.emit('changeLocation', {
           'latitude': lastPosition!.latitude,
           'longitude': lastPosition!.longitude,

@@ -51,7 +51,12 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 229, 229),
       body: Padding(
-        padding: EdgeInsets.only(top: height / 20),
+        padding: EdgeInsets.only(
+          top: height / 20,
+          right: 12,
+          left: 12,
+          bottom: 12,
+        ),
         child: Column(
           children: [
             Container(
@@ -80,8 +85,14 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
                   ),
                 ],
               ),
+            ),SizedBox(height: 5,),
+            Text(
+              "Select Client",
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black),
             ),
-            const SizedBox(height: 20),
             isLoading
                 ? const CircularProgressIndicator()
                 : Expanded(
@@ -98,10 +109,8 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
                                   employeeId: widget.employeeId,
                                   firstName: widget.firstName,
                                   profilePicture: widget.profilePicture,
-                                  clientId:
-                                      client['_id'], 
-                                  clientName: client[
-                                      'clientName'],
+                                  clientId: client['_id'],
+                                  clientName: client['clientName'],
                                 ),
                               ),
                             );
@@ -119,7 +128,7 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
                                 Text(
                                   client['clientName'],
                                   style: const TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -127,8 +136,8 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
                                 Text(
                                   client['address'],
                                   style: const TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -136,8 +145,8 @@ class _SelectClientScreenState extends State<SelectClientScreen> {
                                 Text(
                                   "Number:   ${client['contactNumber']}",
                                   style: const TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ],

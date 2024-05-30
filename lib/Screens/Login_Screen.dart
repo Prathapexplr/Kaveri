@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  bool isvisible = false;
+  bool isvisible = true;
   bool showFields = false;
 
   TextEditingController usernameController = TextEditingController();
@@ -215,7 +216,11 @@ class _LoginScreenState extends State<LoginScreen>
                                   ),
                                 ),
                               ),
-                              const Text("Enter 6 Digit password"),
+                              Text(
+                                "Enter 6 Digit password",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14, color: Colors.grey),
+                              ),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -228,9 +233,12 @@ class _LoginScreenState extends State<LoginScreen>
                                 ),
                                 child: TextButton(
                                   onPressed: _handleLogin,
-                                  child: const Text(
-                                    "LOGIN",
-                                    style: TextStyle(color: Colors.white),
+                                  child: Text(
+                                    "Log In",
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),
@@ -241,7 +249,13 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
                 Visibility(
                     visible: !showFields,
-                    child: const Text("Sales and Marketing"))
+                    child: Text(
+                      "Sales and Marketing",
+                      style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ))
               ],
             ),
           ),
