@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kaveri/Screens/Order/Items_Select_Product.dart';
+import 'package:kaveri/Screens/Order/Selected_Client.dart';
 
-class AddItems extends StatefulWidget {
+class ItemsCalculationScreen extends StatefulWidget {
   final String firstName;
   final String employeeId;
   final String profilePicture;
@@ -10,7 +11,7 @@ class AddItems extends StatefulWidget {
   String productName;
   String amount;
 
-  AddItems({
+  ItemsCalculationScreen({
     super.key,
     required this.firstName,
     required this.employeeId,
@@ -21,10 +22,10 @@ class AddItems extends StatefulWidget {
   });
 
   @override
-  State<AddItems> createState() => _AddItemsState();
+  State<ItemsCalculationScreen> createState() => _ItemsCalculationScreenState();
 }
 
-class _AddItemsState extends State<AddItems> {
+class _ItemsCalculationScreenState extends State<ItemsCalculationScreen> {
   late TextEditingController sellingPriceController;
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController discountController = TextEditingController();
@@ -109,7 +110,8 @@ class _AddItemsState extends State<AddItems> {
                                       Container(
                                         width: width / 1.4,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                           color: const Color.fromARGB(
                                               255, 227, 226, 233),
                                         ),
@@ -123,13 +125,15 @@ class _AddItemsState extends State<AddItems> {
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     widget.productName,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 18,
                                                     ),
                                                   ),
@@ -172,8 +176,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(
@@ -197,8 +203,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(
@@ -222,8 +230,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(
@@ -324,13 +334,13 @@ class _AddItemsState extends State<AddItems> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SizedBox(),
-                          // SelectedClientScreen(
-                          //   employeeId: widget.employeeId,
-                          //   firstName: widget.firstName,
-                          //   profilePicture: widget.profilePicture,
-                          // )
-                        ),
+                            builder: (context) => SelectedClientScreen(
+                                  employeeId: widget.employeeId,
+                                  firstName: widget.firstName,
+                                  profilePicture: widget.profilePicture,
+                                  clientId: widget.productID,
+                                  clientName: widget.productName,
+                                )),
                       );
                     },
                     child: Container(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:kaveri/Screens/Order/Add_Items.dart';
+import 'package:kaveri/Screens/Order/Items_Calculation.dart';
 
 class ItemsSelectProductScreen extends StatefulWidget {
   final String firstName;
@@ -110,7 +110,7 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddItems(
+                                  builder: (context) => ItemsCalculationScreen(
                                     employeeId: widget.employeeId,
                                     firstName: widget.firstName,
                                     profilePicture: widget.profilePicture,

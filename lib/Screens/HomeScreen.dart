@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:kaveri/Screens/Order/Add_Items.dart';
+import 'package:kaveri/Screens/Order/Items_Calculation.dart';
 import 'package:kaveri/Screens/Order/Neworder.dart';
 import 'package:kaveri/Screens/Order/Order_Screen.dart';
 import 'package:kaveri/Widgets/inoutbutton.dart';
@@ -36,7 +36,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
-        AddItems(
+        ItemsCalculationScreen(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
             profilePicture: widget.profilePicture,
