@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kaveri/Screens/Order/Items_Select_Product.dart';
 import 'package:kaveri/Screens/Order/Selected_Client.dart';
 
 class ItemsCalculationScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class ItemsCalculationScreen extends StatefulWidget {
   String productID;
   String productName;
   String amount;
+  final String clientId;
+  final String clientName;
 
   ItemsCalculationScreen({
     super.key,
@@ -19,6 +22,8 @@ class ItemsCalculationScreen extends StatefulWidget {
     required this.productID,
     required this.productName,
     required this.amount,
+    required this.clientId,
+    required this.clientName,
   });
 
   @override

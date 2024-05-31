@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:kaveri/Screens/Order/Items_Calculation.dart';
 import 'package:kaveri/Screens/Order/Neworder.dart';
 import 'package:kaveri/Screens/Order/Order_Screen.dart';
 import 'package:kaveri/Widgets/inoutbutton.dart';
@@ -36,13 +35,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
-        ItemsCalculationScreen(
-            employeeId: widget.employeeId,
-            firstName: widget.firstName,
-            profilePicture: widget.profilePicture,
-            amount: 'widget.amount',
-            productID: 'widget.productID',
-            productName: 'widget.productName'),
+        Neworder(
+          firstName: widget.firstName,
+          employeeId: widget.employeeId,
+          profilePicture: widget.profilePicture,
+        ),
         OrderScreen(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
@@ -110,8 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: const Color(0xffEBF5FF),
         title: const Text('Home'),
-        titleTextStyle:
-            const TextStyle(color: Colors.black), 
+        titleTextStyle: const TextStyle(color: Colors.black),
         centerTitle: true,
       ),
       drawer: Drawer(

@@ -194,11 +194,14 @@ class _NeworderState extends State<Neworder> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ItemsSelectProductScreen(
+                                          builder: (context) =>
+                                              ItemsSelectProductScreen(
                                                 employeeId: widget.employeeId,
                                                 firstName: widget.firstName,
                                                 profilePicture:
                                                     widget.profilePicture,
+                                                clientId: '',
+                                                clientName: '',
                                               )),
                                     );
                                   },
@@ -246,11 +249,14 @@ class _NeworderState extends State<Neworder> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ItemsSelectProductScreen(
+                                          builder: (context) =>
+                                              ItemsSelectProductScreen(
                                                 employeeId: widget.employeeId,
                                                 firstName: widget.firstName,
                                                 profilePicture:
                                                     widget.profilePicture,
+                                                clientId: '',
+                                                clientName: '',
                                               )),
                                     );
                                   },

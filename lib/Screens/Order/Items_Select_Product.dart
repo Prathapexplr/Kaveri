@@ -7,11 +7,15 @@ class ItemsSelectProductScreen extends StatefulWidget {
   final String firstName;
   final String employeeId;
   final String profilePicture;
+  final String clientId;
+  final String clientName;
   const ItemsSelectProductScreen({
     super.key,
     required this.firstName,
     required this.employeeId,
     required this.profilePicture,
+    required this.clientId,
+    required this.clientName,
   });
 
   @override
@@ -120,6 +124,8 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                         'No Price',
                                     productID:
                                         product['productID'] ?? 'No Product ID',
+                                    clientId: widget.clientId,
+                                    clientName: widget.clientName,
                                   ),
                                 ),
                               );

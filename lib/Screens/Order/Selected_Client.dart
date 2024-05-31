@@ -213,6 +213,9 @@ class _SelectedClientScreenState extends State<SelectedClientScreen> {
                                                   firstName: widget.firstName,
                                                   profilePicture:
                                                       widget.profilePicture,
+                                                      clientId: widget.clientId,
+                                                      clientName:
+                                                          widget.clientName,
                                                 )),
                                       );
                                     },
@@ -269,15 +272,19 @@ class _SelectedClientScreenState extends State<SelectedClientScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ItemsSelectProductScreen(
-                                                      employeeId:
-                                                          widget.employeeId,
-                                                      firstName:
-                                                          widget.firstName,
-                                                      profilePicture:
-                                                          widget.profilePicture,
-                                                    )),
+                                                builder: (context) => SizedBox()
+                                                    // ItemsSelectProductScreen(
+                                                    //   employeeId:
+                                                    //       widget.employeeId,
+                                                    //   firstName:
+                                                    //       widget.firstName,
+                                                    //   profilePicture:
+                                                    //       widget.profilePicture,
+                                                    //   clientId: widget.clientId,
+                                                    //   clientName:
+                                                    //       widget.clientName,
+                                                    // )
+                                                    ),
                                           );
                                         },
                                         child: const Text(
