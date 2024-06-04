@@ -7,6 +7,8 @@ import 'package:kaveri/Screens/Order/Items_Select_Product.dart';
 
 class SelectedClientScreen extends StatefulWidget {
   final String firstName;
+  final String lastName;
+
   final String employeeId;
   final String profilePicture;
   final String clientId;
@@ -15,6 +17,8 @@ class SelectedClientScreen extends StatefulWidget {
   const SelectedClientScreen({
     Key? key,
     required this.firstName,
+    required this.lastName,
+
     required this.employeeId,
     required this.profilePicture,
     required this.clientId,
@@ -211,6 +215,8 @@ class _SelectedClientScreenState extends State<SelectedClientScreen> {
                                                 ItemsSelectProductScreen(
                                                   employeeId: widget.employeeId,
                                                   firstName: widget.firstName,
+                                    lastName: widget.lastName,
+
                                                   profilePicture:
                                                       widget.profilePicture,
                                                 )),
@@ -275,6 +281,8 @@ class _SelectedClientScreenState extends State<SelectedClientScreen> {
                                                           widget.employeeId,
                                                       firstName:
                                                           widget.firstName,
+                                    lastName: widget.lastName,
+
                                                       profilePicture:
                                                           widget.profilePicture,
                                                     )),

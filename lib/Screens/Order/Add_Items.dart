@@ -17,7 +17,7 @@ class AddItems extends StatefulWidget {
     required this.profilePicture,
     required this.productID,
     required this.productName,
-    required this.amount,
+    required this.amount, required String lastName,
   });
 
   @override

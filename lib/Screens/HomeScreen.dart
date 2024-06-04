@@ -8,12 +8,14 @@ import 'package:kaveri/Widgets/inoutbutton.dart';
 
 class NavigationScreen extends StatefulWidget {
   final String firstName;
+  final String lastName;
   final String employeeId;
   final String profilePicture;
 
   const NavigationScreen({
     Key? key,
     required this.firstName,
+    required this.lastName,
     required this.employeeId,
     required this.profilePicture,
   }) : super(key: key);
@@ -28,17 +30,20 @@ class _NavigationScreenState extends State<NavigationScreen> {
   List<Widget> get _BtmNavigationScreens => [
         HomeScreen(
           firstName: widget.firstName,
+          lastName: widget.lastName,
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
         Neworder(
           firstName: widget.firstName,
+          lastName: widget.lastName,
           employeeId: widget.employeeId,
           profilePicture: widget.profilePicture,
         ),
         AddItems(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
+            lastName: widget.lastName,
             profilePicture: widget.profilePicture,
             amount: 'widget.amount',
             productID: 'widget.productID',
@@ -46,6 +51,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         OrderScreen(
             employeeId: widget.employeeId,
             firstName: widget.firstName,
+            lastName: widget.lastName,
             profilePicture: widget.profilePicture),
       ];
 
@@ -76,6 +82,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
 class HomeScreen extends StatefulWidget {
   final String firstName;
+  final String lastName;
+
   final String employeeId;
   final String profilePicture;
 
@@ -84,6 +92,7 @@ class HomeScreen extends StatefulWidget {
     required this.firstName,
     required this.employeeId,
     required this.profilePicture,
+    required this.lastName,
   }) : super(key: key);
 
   @override
@@ -110,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: const Color(0xffEBF5FF),
         title: const Text('Home'),
-        titleTextStyle:
-            const TextStyle(color: Colors.black), 
+        titleTextStyle: const TextStyle(color: Colors.black),
         centerTitle: true,
       ),
       drawer: Drawer(
@@ -336,6 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 130,
                   child: InOutButton(
                     firstName: widget.firstName,
+                    lastName: widget.lastName,
                     employeeId: widget.employeeId,
                   ))
             ],

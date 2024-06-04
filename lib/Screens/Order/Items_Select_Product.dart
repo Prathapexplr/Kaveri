@@ -5,13 +5,15 @@ import 'package:kaveri/Screens/Order/Add_Items.dart';
 
 class ItemsSelectProductScreen extends StatefulWidget {
   final String firstName;
+  final String lastName;
+
   final String employeeId;
   final String profilePicture;
   const ItemsSelectProductScreen({
     super.key,
     required this.firstName,
     required this.employeeId,
-    required this.profilePicture,
+    required this.profilePicture, required this.lastName,
   });
 
   @override
@@ -113,6 +115,8 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                   builder: (context) => AddItems(
                                     employeeId: widget.employeeId,
                                     firstName: widget.firstName,
+                                    lastName: widget.lastName,
+
                                     profilePicture: widget.profilePicture,
                                     productName: product['productName'] ??
                                         'No Product Name',

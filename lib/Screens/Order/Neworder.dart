@@ -4,13 +4,16 @@ import 'package:kaveri/Screens/Order/Items_Select_Product.dart';
 
 class Neworder extends StatefulWidget {
   final String firstName;
+  final String lastName;
+
   final String employeeId;
   final String profilePicture;
   const Neworder(
       {Key? key,
       required this.firstName,
       required this.employeeId,
-      required this.profilePicture})
+      required this.profilePicture,
+      required this.lastName})
       : super(key: key);
 
   @override
@@ -142,6 +145,7 @@ class _NeworderState extends State<Neworder> {
                               builder: (context) => SelectClientScreen(
                                     employeeId: widget.employeeId,
                                     firstName: widget.firstName,
+                                    lastName: widget.lastName,
                                     profilePicture: widget.profilePicture,
                                   )),
                         );
@@ -194,9 +198,11 @@ class _NeworderState extends State<Neworder> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ItemsSelectProductScreen(
+                                          builder: (context) =>
+                                              ItemsSelectProductScreen(
                                                 employeeId: widget.employeeId,
                                                 firstName: widget.firstName,
+                                                lastName: widget.lastName,
                                                 profilePicture:
                                                     widget.profilePicture,
                                               )),
@@ -246,9 +252,11 @@ class _NeworderState extends State<Neworder> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ItemsSelectProductScreen(
+                                          builder: (context) =>
+                                              ItemsSelectProductScreen(
                                                 employeeId: widget.employeeId,
                                                 firstName: widget.firstName,
+                                                lastName: widget.lastName,
                                                 profilePicture:
                                                     widget.profilePicture,
                                               )),

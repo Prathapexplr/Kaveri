@@ -4,11 +4,15 @@ import 'package:kaveri/Screens/Order/Neworder.dart';
 
 class OrderScreen extends StatefulWidget {
   final String firstName;
+  final String lastName;
+
   final String employeeId;
   final String profilePicture;
   const OrderScreen(
       {super.key,
       required this.firstName,
+      required this.lastName,
+
       required this.employeeId,
       required this.profilePicture});
 
@@ -44,6 +48,8 @@ class _OrderState extends State<OrderScreen> {
                   MaterialPageRoute(
                       builder: (context) => Neworder(
                             firstName: widget.firstName,
+                                    lastName: widget.lastName,
+
                             employeeId: widget.employeeId,
                             profilePicture: widget.profilePicture,
                           )),

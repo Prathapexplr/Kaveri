@@ -86,10 +86,15 @@ class _LoginScreenState extends State<LoginScreen>
         final Map<String, dynamic> employeeData = responseData['employee'];
 
         final String firstName = employeeData['firstName'] ?? '';
+        final String lastName = employeeData['lastName'] ?? '';
+
         final String employeeId = employeeData['employeeId'] ?? '';
         final String profilePicture = employeeData['profilePicture'] ?? '';
 
-        if (firstName.isEmpty || employeeId.isEmpty || profilePicture.isEmpty) {
+        if (firstName.isEmpty ||
+            employeeId.isEmpty ||
+            profilePicture.isEmpty ||
+            lastName.isEmpty) {
           throw Exception('Missing data in the response');
         }
 
@@ -105,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen>
           MaterialPageRoute(
             builder: (context) => NavigationScreen(
               firstName: firstName,
+              lastName: lastName,
               employeeId: employeeId,
               profilePicture: profilePicture,
             ),

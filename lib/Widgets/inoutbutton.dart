@@ -5,28 +5,33 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class InOutButton extends StatefulWidget {
   final String firstName;
+  final String lastName;
   final String employeeId;
 
   const InOutButton({
     Key? key,
     required this.firstName,
     required this.employeeId,
+    required this.lastName,
   }) : super(key: key);
 
   @override
   _InOutButtonState createState() => _InOutButtonState(
         firstName: firstName,
+        lastName: lastName,
         employeeId: employeeId,
       );
 }
 
 class _InOutButtonState extends State<InOutButton> {
   final String firstName;
+  final String lastName;
   final String employeeId;
 
   _InOutButtonState({
     required this.firstName,
     required this.employeeId,
+    required this.lastName,
   });
 
   bool isIn = false;
@@ -45,19 +50,18 @@ class _InOutButtonState extends State<InOutButton> {
   @override
   void dispose() {
     stopLocationUpdates();
-    socket.disconnect();
     super.dispose();
   }
 
   void initSocket() {
-    socket = IO.io('https://api.jaynaturals.com', <String, dynamic>{
-      'transports': ['websocket','polling'],
-      'autoConnect': false,
+    socket = IO.io('wss://api.jaynaturals.com', <String, dynamic>{
+      'transports': ['websocket', 'polling'],
+      'timeout': 10000, // Set a custom timeout (in milliseconds)
+      'autoConnect': false, // Auto connect should be false
     });
 
     socket.on('connect', (_) {
       print('Connected to socket server');
-      // Emit a test event when connected
       socket.emit('testConnection', {'message': 'Test connection successful'});
     });
 
@@ -67,19 +71,29 @@ class _InOutButtonState extends State<InOutButton> {
 
     socket.on('connect_error', (error) {
       print('Connection Error: $error');
-      // Additional logging
-      if (error is Map &&
-          error.containsKey('type') &&
-          error['type'] == 'TransportError') {
-        print('TransportError: ${error['desc'] ?? 'No description provided'}');
+      if (error != null && error['msg'] != null) {
+        print('Connection error message: ${error['msg']}');
+      }
+      if (error != null && error['desc'] != null) {
+        print('Connection error description: ${error['desc']}');
+      }
+      if (error != null && error['type'] != null) {
+        print('Connection error type: ${error['type']}');
       }
     });
 
     socket.on('error', (error) {
       print('Socket Error: $error');
+      if (error != null && error['msg'] != null) {
+        print('Socket error message: ${error['msg']}');
+      }
+      if (error != null && error['desc'] != null) {
+        print('Socket error description: ${error['desc']}');
+      }
+      if (error != null && error['type'] != null) {
+        print('Socket error type: ${error['type']}');
+      }
     });
-
-    socket.connect();
   }
 
   Future<bool> _handleLocationPermission() async {
@@ -125,22 +139,43 @@ class _InOutButtonState extends State<InOutButton> {
         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
       (Position position) {
         lastPosition = position;
+        print('Updated lastPosition: $lastPosition');
       },
       onError: (error) {
         print('Error getting location: $error');
       },
     );
 
-    timer = Timer.periodic(const Duration(seconds: 10), (_) {
+    timer = Timer.periodic(const Duration(seconds: 5), (_) {
       if (isIn && lastPosition != null) {
-        print(
-            'Preparing to send location for $firstName (ID: $employeeId): ${lastPosition!.latitude}, ${lastPosition!.longitude}');
-        socket.emit('changeLocation', {
-          'latitude': lastPosition!.latitude,
-          'longitude': lastPosition!.longitude,
-          'firstName': firstName,
-          'employeeId': employeeId,
-        });
+        final double? latitude = lastPosition?.latitude;
+        final double? longitude = lastPosition?.longitude;
+
+        if (latitude != null && longitude != null) {
+          print(
+              'Preparing to send location for ${widget.firstName} ${widget.lastName} (ID: $employeeId): $latitude, $longitude');
+
+          // Additional debugging information
+          print('Socket connected: ${socket.connected}');
+          print('Sending data: ${{
+            'employeeId': employeeId,
+            'latitude': latitude,
+            'longitude': longitude,
+          }}');
+
+          socket.emit('sendLocation', {
+            'data': {
+              'employeeId': employeeId,
+              'latitude': latitude,
+              'longitude': longitude,
+            }
+          });
+          print('Location data sent');
+        } else {
+          print('Error: Latitude or longitude is null');
+        }
+      } else {
+        print('Tracking is not active or lastPosition is null');
       }
     });
   }
@@ -148,6 +183,7 @@ class _InOutButtonState extends State<InOutButton> {
   void stopLocationUpdates() {
     positionStream?.cancel();
     timer?.cancel();
+    Geolocator.getCurrentPosition().then((_) {}).catchError((_) {});
     print('Stopped location updates');
   }
 
@@ -155,12 +191,14 @@ class _InOutButtonState extends State<InOutButton> {
     setState(() {
       isIn = !isIn;
       if (isIn) {
+        socket.connect();
         startLocationUpdates();
         DateTime now = DateTime.now();
         punchedInTime =
             '${now.hour}:${now.minute} ${now.hour >= 12 ? 'pm' : 'am'}';
       } else {
         stopLocationUpdates();
+        socket.disconnect();
         punchedInTime = '';
       }
     });
@@ -201,7 +239,7 @@ class _InOutButtonState extends State<InOutButton> {
               if (isIn)
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     const Text(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:kaveri/Screens/HomeScreen.dart';
 import 'package:kaveri/Screens/Login_Screen.dart';
 
 void main() {
