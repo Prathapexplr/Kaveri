@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:kaveri/Screens/Order/Add_Items.dart';
+import 'package:kaveri/Screens/Order/Items_Calculation.dart';
 
 class ItemsSelectProductScreen extends StatefulWidget {
   final String firstName;
@@ -9,11 +9,13 @@ class ItemsSelectProductScreen extends StatefulWidget {
 
   final String employeeId;
   final String profilePicture;
+  final String clientId;
+  final String clientName;
   const ItemsSelectProductScreen({
     super.key,
     required this.firstName,
     required this.employeeId,
-    required this.profilePicture, required this.lastName,
+    required this.profilePicture, required this.lastName, required this.clientId, required this.clientName,
   });
 
   @override
@@ -112,7 +114,7 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddItems(
+                                  builder: (context) => ItemsCalculationScreen(
                                     employeeId: widget.employeeId,
                                     firstName: widget.firstName,
                                     lastName: widget.lastName,
@@ -124,6 +126,8 @@ class _ItemsSelectProductScreenState extends State<ItemsSelectProductScreen> {
                                         'No Price',
                                     productID:
                                         product['productID'] ?? 'No Product ID',
+                                    clientId: widget.clientId,
+                                    clientName: widget.clientName,
                                   ),
                                 ),
                               );

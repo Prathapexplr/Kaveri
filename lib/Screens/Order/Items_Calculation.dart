@@ -109,7 +109,8 @@ class _AddItemsState extends State<AddItems> {
                                       Container(
                                         width: width / 1.4,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                           color: const Color.fromARGB(
                                               255, 227, 226, 233),
                                         ),
@@ -123,13 +124,15 @@ class _AddItemsState extends State<AddItems> {
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     widget.productName,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 18,
                                                     ),
                                                   ),
@@ -172,8 +175,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(
@@ -197,8 +202,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(
@@ -222,8 +229,10 @@ class _AddItemsState extends State<AddItems> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 8),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: Colors.white,
                                         ),
                                         child: TextFormField(

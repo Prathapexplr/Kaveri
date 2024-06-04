@@ -205,6 +205,8 @@ class _NeworderState extends State<Neworder> {
                                                 lastName: widget.lastName,
                                                 profilePicture:
                                                     widget.profilePicture,
+                                                clientId: '',
+                                                clientName: '',
                                               )),
                                     );
                                   },
@@ -259,6 +261,8 @@ class _NeworderState extends State<Neworder> {
                                                 lastName: widget.lastName,
                                                 profilePicture:
                                                     widget.profilePicture,
+                                                clientId: '',
+                                                clientName: '',
                                               )),
                                     );
                                   },

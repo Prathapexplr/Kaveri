@@ -285,7 +285,7 @@ class _SelectedClientScreenState extends State<SelectedClientScreen> {
                                                       firstName:
                                                           widget.firstName,
                                                       profilePicture:
-                                                          widget.profilePicture,
+                                                          widget.profilePicture, lastName: '', clientId: '', clientName: '',
                                                     )),
                                           );
                                         },
